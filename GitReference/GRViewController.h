@@ -10,4 +10,7 @@
 
 @interface GRViewController : UIViewController
 
+- (NSArray *)gitCommands;
+- (CGFloat)heightOfReferenceString:(NSString *)reference;
+
 @end
