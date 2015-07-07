@@ -22,17 +22,32 @@ static NSString * const Reference = @"reference";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    float top = 0;
+    NSArray *array = [self gitCommands];
+    
     self.title = @"GitReference";
     
     UIScrollView *scrollView = [UIScrollView new];
     scrollView.frame = self.view.frame;
-    scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1000.0);
     [self.view addSubview:scrollView];
     
-    UIView *redView = [UIView new];
-    redView.frame = CGRectMake(100.0, 600.0, 100.0, 100.0);
-    redView.backgroundColor = [UIColor redColor];
-    [scrollView addSubview:redView];
+    for(int i = 0; i < array.count; i++)
+    {
+        UILabel *command = [UILabel new];
+        UILabel *reference = [UILabel new];
+        
+        command.text = [array[i] objectForKey:@"command"];
+        reference.text = [array[i] valueForKey:@"reference"];
+        
+        command.frame = CGRectMake(15.0, top, scrollView.frame.size.width, 130);
+        reference.frame = CGRectMake(45, top + 20, scrollView.frame.size.width + 40, 130);
+        top += 100;
+        
+        [scrollView addSubview:command];
+        [scrollView addSubview:reference];
+    }
+    
+    scrollView.contentSize = CGSizeMake(self.view.frame.size.width + 100, top + 30);
     
 }
 
